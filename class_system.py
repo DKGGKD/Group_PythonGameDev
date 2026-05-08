@@ -3,7 +3,7 @@
 
 #Different stats per class
 
-#Different skills per classes (option)?
+#Different skills per classes (optional)?
 
 #Different inventory depending on class? (optional)
     #need to figure out how to edit stats depending on items in inventory
