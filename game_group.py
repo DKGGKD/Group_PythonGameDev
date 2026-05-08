@@ -43,7 +43,7 @@ while True:
     #maybe add shop here?
 
 
-    monst_name, monst_atk, monst_hp = spawn_monster() #12
+    monst_name, monst_atk, monst_hp, monst_def = spawn_monster() #12
     print(f"You have encountered a {monst_name}")
     display_menu()
     action = input("Please select your action: ")

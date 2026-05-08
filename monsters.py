@@ -1,9 +1,9 @@
 from random import choice
 monsters = [
     #0
-    ("goblin", 5, 10),
+    ("Goblin", 5, 10, 1),
     #1
-    ("slime", 3, 5)
+    ("Slime", 3, 5, 0)
 ]
 
 def spawn_monster():
