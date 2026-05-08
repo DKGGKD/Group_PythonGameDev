@@ -8,7 +8,7 @@ from monsters import spawn_monster
 #4. classes x
 #5. ATTACK /
 #6. defense and skill x
-#7. gold and shop x
+#7. gold and shop + inventory system x
 #8. If die = end /
 #9. game loop /
 #10. menu /

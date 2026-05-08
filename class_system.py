@@ -3,9 +3,9 @@
 
 #Different stats per class
 
-#Different skills per classes?
+#Different skills per classes (option)?
 
-#Different inventory depending on class
+#Different inventory depending on class? (optional)
     #need to figure out how to edit stats depending on items in inventory
     #need to figure out how to induce healing and then remove that item from inventory
         #reminder, dictionaries can't have duplicates
