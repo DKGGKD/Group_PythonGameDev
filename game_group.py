@@ -1,18 +1,25 @@
-import attack_system
+import attack_system, skill_system
 from monsters import spawn_monster
 
 #REQUIREMENTS
-#dungeon game
-#player name add
-#stats
-#classes
-#ATTACK
-#defense and skill
-#gold and shop
-#If die = end, if kill boss = end
+#1. dungeon game x
+#2. player name add /
+#3. stats /
+#4. classes x
+#5. ATTACK /
+#6. defense and skill x
+#7. gold and shop x
+#8. If die = end /
+#9. game loop /
+#10. menu /
+#11. monster attacking /
+#12. monster spawning /
+#13. if kill boss = end x
+#14. cocky narrator(optional) x
 
+#2
 name = input("What would be your player name?")
-player = {
+player = { #3
     
     "name": name.capitalize(),
     "atk": 3,
@@ -24,18 +31,16 @@ menu = ["1. Attack", "2. Run"]
 
 print(f"Welcome to the Dungeon! {player['name']}")
 
-
+#10
 def display_menu():
-    
-    #kwrd #iterator_var #iterable, ranges  
     for menu_item in menu:
         
         print(menu_item)
     
-#keyword #condition
+#9
 while True:
     
-    monst_name, monst_atk, monst_hp = spawn_monster()
+    monst_name, monst_atk, monst_hp = spawn_monster() #12
     print(f"You have encountered a {monst_name}")
     display_menu()
     action = input("Please select your action: ")
@@ -49,9 +54,9 @@ while True:
             
         else:
             
-            player["hp"] = attack_system.damage_player(player["hp"], monst_atk)
+            player["hp"] = attack_system.damage_player(player["hp"], monst_atk) #11
             print(f"You have now {player["hp"]} HP")
-            if player["hp"] <= 0:
+            if player["hp"] <= 0: #8
             
                 print("You died")
                 break
