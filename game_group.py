@@ -22,7 +22,7 @@ player = { #3
     
     "name": name,
     "atk" : 5,
-    "hp"  : 100,
+    "hp"  : 1,
     "def" : 1,
     "cls" : "THIS SHOULDN'T APPEAR"
     

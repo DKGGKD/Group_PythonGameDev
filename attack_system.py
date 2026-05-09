@@ -16,7 +16,7 @@ def damage_monster(name, hp: int, atk: int, defe: int, extra: int): #damages mon
         atk = 0
     damage = hp - atk
     print(f"With a defense of {defe}...")
-    print(f"{name} attacks the monster for {atk} damage")
+    print(f"{name} attacks the monster for {atk} damage!")
     return damage
     
 

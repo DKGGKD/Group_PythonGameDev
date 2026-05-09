@@ -17,7 +17,7 @@ def rest(mon):
     print(f"The {mon} rests this turn...!")
 
 def ded(you):
-    print(f"~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+    print(f"z z z z z z z z z z z z z z z z z")
     print(f"{you}'s HP has been reduced to 0!")
     print("YOU DIED")
 
