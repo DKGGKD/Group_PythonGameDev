@@ -37,7 +37,7 @@ while player["hp"] > 0: #will this fix monster appear?
     #needs here:
     #random int does either battle room, treasure room, hallway (50% to do something), and boss room (only applicable after 10 rooms)
 
-    #problem: monster keeps appearing in the middle of battle
+    #new problem: monster health becomes player health after death
     player["hp"] = battle.battleloop(player["name"], player["hp"], player["atk"], player["def"])
 
     textstuff.ded(player["name"])
