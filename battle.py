@@ -36,7 +36,7 @@ def battleloop(player_name, player_hp, player_atk, player_def):
             #is monster dead?
             if monst_hp <= 0:
                 textstuff.defeat(player_name, monst_name)
-                break
+                return player_hp #so it won't return the monster's health as the player's
 
             print(f"The {monst_name} has {monst_hp} hp remaining")
         #TO BE ADDED (SKILLS)
