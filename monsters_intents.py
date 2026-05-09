@@ -1,20 +1,22 @@
 import attack_system
 
-def patpat(pattern, atk):
+#patterns
+def patpat(name, pattern: int, atk: int):
     if pattern == 1:
-        print(f"The monster intends to attack for {atk} damage!") #light
+        print(f"The {name} intends to attack for {atk} damage!") #light
 
     if pattern == 2:
-        print(f"The monster intends to deal double damage!") #heavy
+        this = atk * 2
+        print(f"The {name} intends to deal double ({this}) damage!") #heavy
 
 
 #attacks
 
-def helit(hp, atk, defe):
-    hp = attack_system.damage_player(hp, atk, defe) #light
+def helit(name, hp, atk, defe):
+    hp = attack_system.damage_light(name, hp, atk, defe) #light
     return hp
 
-def hehit(hp, atk, defe):
-    hp = attack_system.damage_heavy(hp, atk, defe) #heavy
+def hehit(name, hp, atk, defe):
+    hp = attack_system.damage_heavy(name, hp, atk, defe) #heavy
     return hp
 

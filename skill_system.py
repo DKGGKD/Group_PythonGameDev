@@ -1,7 +1,12 @@
+#GENERAL
 #healing system
 
 #defending system
     #halve damage/reduce damage to 0? (optional)
+
+#check stats
+    #check on player and enemy stats
+
 
 #Different skills depending on classes? (optional)
 #Either cooldown system OR mp system? (optional)

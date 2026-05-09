@@ -1,18 +1,19 @@
-def tired():
-    print(f"~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
-    print("The monster is tired...")
-    print(f"~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+def tired(mon):
+    print(f"z z z z z z z z z z z z z z z z")
+    print(f"The {mon} is tired...")
+    print(f"z z z z z z z z z z z z z z z z")
 
-def defeat():
+def defeat(you):
     print(f"------------------------------")
-    print(f"You have defeated the monster")
+    print(f"{you} defeated the monster!")
     print(f"------------------------------")
 
-def rest():
+def rest(mon):
     print(f"------------------------------")
-    print("The monster rests this turn!")
+    print(f"The {mon} rests this turn...")
     print(f"------------------------------")
 
 def ded():
     print(f"~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+    print(f"Your HP has been reduced to 0!")
     print("You died")
