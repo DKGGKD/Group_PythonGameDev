@@ -35,6 +35,7 @@ def battleloop(player_name, player_hp, player_atk, player_def):
         
             #is monster dead?
             if monst_hp <= 0:
+                print(f"---------PLAYER TURN----------")
                 textstuff.defeat(player_name, monst_name)
                 return player_hp #so it won't return the monster's health as the player's
 

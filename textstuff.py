@@ -1,6 +1,5 @@
 import random
 
-
 def spawn(you, mon):
     print(f"~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
     print(f"{you} encountered a {mon}")
@@ -12,7 +11,7 @@ def tired(mon):
 def defeat(you, mon):
     print(f"% * * * * * * * * * * * * * * %")
     print(f"{you} defeated the {mon}!")
-    print(f"% * * * * * * * * * * * * * * %")
+    print(f"% * * * * * * * * * * * * * * %\n")
 
 def rest(mon):
     print(f"The {mon} rests this turn...!")

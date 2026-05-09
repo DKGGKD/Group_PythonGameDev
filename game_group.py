@@ -40,5 +40,4 @@ while player["hp"] > 0: #will this fix monster appear?
     #new problem: monster health becomes player health after death
     player["hp"] = battle.battleloop(player["name"], player["hp"], player["atk"], player["def"])
 
-    textstuff.ded(player["name"])
-    break
+textstuff.ded(player["name"])
