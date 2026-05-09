@@ -10,8 +10,26 @@
     #need to figure out how to induce healing and then remove that item from inventory
         #reminder, dictionaries can't have duplicates
 
-
-
+def decide(player):
+    while True:
+        print("Decide your class")
+        print(" 1. Meat Shield\n  -Trudging, simple beast with no survival instincts\n  -high defense, low attack")
+        print(" 2. Poor Brigand\n  -Frail thief armed with nothing but what it's stolen\n  -low defense, high attack")
+        print(" 3. Macabre\n  -A creature capable of confusing magics, most harming itself\n  -mid defense, mid attack")
+        cls = int(input("(1,2,3)>"))
+        match cls:
+            case 1:
+                player = "Meat Shield"
+                break
+            case 2:
+                player = "Poor Brigand"
+                break
+            case 3:
+                player = "Macabre"
+                break
+            case _:
+                print("INVALID")
+    return player
 
 #class ideas (OPTIONAL):
 

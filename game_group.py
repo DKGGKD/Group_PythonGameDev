@@ -1,4 +1,4 @@
-import battle
+import battle, class_system, textstuff
 
 #REQUIREMENTS
 #1. dungeon game x
@@ -16,35 +16,28 @@ import battle
 #13. if kill boss = end x
 
 #2
-name = input("What is your name? ")
+name = textstuff.naming()
+
 player = { #3
     
-    "name": name.capitalize(),
-    "atk": 200,
-    "hp" : 100,
-    "def" : 4
+    "name": name,
+    "atk" : 1,
+    "hp"  : 10,
+    "def" : 1,
+    "cls" : "THIS SHOULDN'T APPEAR"
     
 }
-#game variables
-extra = 0
-tired = 0
+print(f"Welcome to the die, {player['name']}!")
 
-menu = ["1. Attack", "2. Defend", "3. Run"]
-#Add "skills" to menu
-
-print(f"Welcome to the Dungeon! {player['name']}")
+player["cls"] = class_system.decide(player)
+print(player["cls"])
 
 #10
-def display_menu():
-    for menu_item in menu:
-        
-        print(menu_item)
-    
-#9
 while True:
     #needs here:
     #random int does either battle room, treasure room, hallway (50% to do something), and boss room (only applicable after 10 rooms)
-    if player["hp"] != 0:
+    if player["hp"] != 0: #problem: monster keeps appearing in the middle of battle
         player["hp"] = battle.battleloop(player["name"], player["hp"], player["atk"], player["def"])
     else:
+        textstuff.ded(player["name"])
         break
