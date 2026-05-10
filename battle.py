@@ -1,76 +1,88 @@
-import attack_system, random, monsters_intents, textstuff
+import attack_system, random, monsters_intents, textstuff, skill_system, debuff
 from monsters import spawn_monster
 
-menu = ["1. Attack", "2. Defend", "3. Skill"]
+menu = ["1. Attack", "2. Defend", "3. Skill", "4. Rest"]
 
 def display_menu():
     for menu_item in menu:
         print(menu_item)
 
-def battleloop(player_name, player_hp, player_atk, player_def):
-    extra = 0
-    tired = False
-    pattern = 0
+#resets stats to remove temporary boosts
 
-    monst_name, monst_atk, monst_hp, monst_def = spawn_monster() #12
-    textstuff.spawn(player_name, monst_name)
+#actual fight
+def battleloop(player:dict):
+    #game variables
+    reset = player["atk"], player["def"] #saves default values
+    extra = 0
+    pattern = 0
+    extra_mon = 0
+
+    monster = spawn_monster() #12
+    textstuff.spawn(player["name"], monster["name"])
 
     while True:
-        #CHECKER
-        if tired: #if the monster is tired
-            textstuff.tired(monst_name) #skips everything
+        #PRELIMINARY CHECKER
+        player["def"] = reset[1] #sets to default values at the start of turn
+        player["atk"] = reset[0]
+        player["mp"]=skill_system.mp_add(player["mp"],player["mp_max"],1)
+
+        if monster['tired'] == True: #if the monster is tired
+            textstuff.tired(monster["name"]) #skips everything
             pattern = 0
-        else:
-            pattern = random.randrange(1, 3) #pick a num 1-3, never plays if tired
-            monsters_intents.patpat(monst_name, pattern, monst_atk) #this monster intent
-        
-        #DECISION
-        display_menu()
-        action = int(input("Action\n>"))
+        else: #otherwise, play monster intent
+            pattern = monsters_intents.randomness(monster, pattern) #pick a num 1-3, never plays if tired
 
-        #PLAYER ATTACK
-        print(f"---------PLAYER TURN----------")
-        if action == 1:
-            monst_hp = attack_system.damage_monster(player_name, monst_hp, player_atk, monst_def, extra) #5
-        
-            #is monster dead?
-            if monst_hp <= 0:
-                print(f"---------PLAYER TURN----------")
-                textstuff.defeat(player_name, monst_name)
-                return player_hp #so it won't return the monster's health as the player's
+        monster['def'], monster['block'] = monsters_intents.heblock(monster, pattern)
 
-            print(f"The {monst_name} has {monst_hp} hp remaining")
-        #TO BE ADDED (SKILLS)
-        elif action == 2:
-            pass
-        elif action == 3:
-            pass
-        else:
-            print("invalid")
-            pass
-        
-        print(f"---------PLAYER TURN----------")
+        turn = True
+        while turn == True:
+        #PLAYER DECISION
+            monsters_intents.patpat(monster, pattern) #this monster intent
+            display_menu()
+            if player['poison'] > 1:
+                player = debuff.poison(player)
+            action = int(input("Action\n>"))
+
+            #PLAYER ATTACK
+            textstuff.player_turn()
+            if action == 1: #attack
+                monster['hp'] = attack_system.damage_monster(monster, player, extra) #5
+                turn = False
+                #TO BE ADDED (SKILLS)
+            elif action == 2: #defend
+                print(f"{player['name']} braced for impact... defense increased by 5 this turn!")
+                player["def"] += 5 # Temporary defense boost
+                turn = False
+            elif action == 3: #skill
+                player, extra = skill_system.skill_menu(player, monster, extra)
+            elif action == 4: #rest
+                skill_system.skill_rest(player)
+                if player['poison'] > 1:
+                    player['poison'] = 0
+                    print(f"{player['name']} also recovers from poison!")
+                turn = False
+            else: #if you're too lazy to act
+                textstuff.nothing(player["name"])
+                turn = False
+
+        if monster['hp'] <= 0:
+            textstuff.defeat(player["name"], monster['name'])
+            break
+        print(f"The {monster['name']} has {monster['hp']} hp remaining")
+        textstuff.player_turn()
 
         #MONSTER ACTION
-        if tired == True:
-            textstuff.rest(monst_name)
-            tired = False
+        if monster['tired'] == True:
+            textstuff.rest(monster['name'])
+            monster['tired'] = False
         else:
-            if pattern == 1:
-                print(f"---------MONSTER TURN---------")
-                player_hp = monsters_intents.helit(monst_name, player_hp, monst_atk, player_def) #wow, didn't think this would work
-            elif pattern == 2:
-                print(f"---------MONSTER TURN---------")
-                player_hp = monsters_intents.hehit(monst_name, player_hp, monst_atk, player_def)
-                tired = True #be tired
-            else:
-                print(f"something broke idiot!")
-            
+           monster, player = monsters_intents.monster_state(monster, player, pattern)
+
         #r u ded?
-        if player_hp <= 0:
+        if player["hp"] <= 0:
             break
         
-        print(f"{player_name}'s HP Remaining: {player_hp}") #eases on if statements
-        print(f"---------MONSTER TURN---------")
+        print(f"{player["name"]}'s HP Remaining: {player["hp"]}") #eases on if statements
+        textstuff.monster_turn()
 
-    return player_hp
+    return player["hp"]

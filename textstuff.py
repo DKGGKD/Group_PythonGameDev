@@ -21,6 +21,33 @@ def ded(you):
     print(f"{you}'s HP has been reduced to 0!")
     print("YOU DIED")
 
+def player_turn():
+    print(f"--- PLAYER TURN ---")
+
+def monster_turn():
+    print(f"--- MONSTER TURN ---")
+
+def squigly():
+    print(f"~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+
+def nothing(name):
+    nothing = random.randrange(1, 9)
+    if nothing == 1:
+        print(f"{name} squirms around like an octopus!")
+    elif nothing == 2:
+        print(f"{name} stands there akwardly!")
+    elif nothing == 3:
+        print(f"{name} spaces out!")
+    elif nothing == 4:
+        print(f"{name} realizes he's in a game and goes insane!")
+    elif nothing == 5:
+        print(f"{name} has become depressed and wishes for death!")
+    elif nothing == 6:
+        print(f"{name} thinks this is Pokemon!")
+    elif nothing == 7:
+        print(f"{name} wants to see how much it hurts!")
+    elif nothing == 7:
+        print(f"{name} wants to share the turn!")
 
 def naming():
     while True:

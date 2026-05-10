@@ -10,7 +10,7 @@
     #need to figure out how to induce healing and then remove that item from inventory
         #reminder, dictionaries can't have duplicates
 
-def decide(player):
+def decide(player:dict):
     while True:
         print("Decide your class")
         print(" 1. Meat Shield\n  -Trudging, simple beast with no survival instincts\n  -high defense, low attack")
@@ -19,16 +19,55 @@ def decide(player):
         cls = int(input("(1,2,3)>"))
         match cls:
             case 1:
-                player = "Meat Shield"
+                player = meat(player)
                 break
             case 2:
-                player = "Poor Brigand"
+                player = poor(player)
                 break
             case 3:
-                player = "Macabre"
+                player = maca(player)
                 break
             case _:
                 print("INVALID")
+    print(f"--- STATS ---")
+    print(f"{player['name']} the {player['cls']}\nAttack: {player['atk']}\nHP: {player['hp']}\nDefense: {player['def']}")
+    print(f"--- STATS ---")
+    return player
+
+def meat(player:dict):
+    player.update({
+    "atk" : 4,
+    "hp"  : 100,
+    "hp_max"  : 100,
+    "mp"  : 20,
+    "mp_max"  : 20,
+    "def" : 8,
+    "cls" : "Meat Shield"
+    })
+    return player
+
+def poor(player:dict):
+    player.update({
+    "atk" : 10,
+    "hp"  : 80,
+    "hp_max"  : 80,
+    "mp"  : 15,
+    "mp_max"  : 15,
+    "def" : 2,
+    "cls" : "Poor Brigand"
+    })
+    return player
+
+def maca(player:dict):
+    player.update({
+    "atk" : 6,
+    "hp"  : 80,
+    "hp_max"  : 80,
+    "mp"  : 40,
+    "mp_max"  : 40,
+    "def" : 6,
+    "cls" : "Macabre"
+    })
     return player
 
 #class ideas (OPTIONAL):

@@ -10,38 +10,43 @@ def damage_calc(power, block, boost): #calcs damage
     damage -= block
     return damage
 
-def damage_monster(name, hp: int, atk: int, defe: int, extra: int): #damages monster
-    atk = damage_calc(atk, defe, extra)
+def damage_monster(monster:dict, player:dict, extra:int): #damages monster
+    atk = damage_calc(player['atk'], monster['def'], extra)
     if atk <= 0:
         atk = 0
-    damage = hp - atk
-    print(f"With a defense of {defe}...")
-    print(f"{name} attacks the monster for {atk} damage!")
+    damage = monster['hp'] - atk
+    print(f"With a defense of {monster['def']}...")
+    print(f"{player['name']} attacks the monster for {atk} damage!")
     return damage
     
 
 
-def damage_player(hp, atk, defe):
+def damage_player(hp, atk, defe, boost):
+    atk += boost
     damage = atk - defe
     if damage <= 0:
         damage = 0
-    return hp - damage
-
-def damage_light(name, hp, atk, defe):
-    damage = damage_player(hp, atk, defe)
-    output = hp - damage
-    if output < 0:
-        output = 0
-    print(f"With a defense of {defe}...")
-    print(f"The {name} deals {output} damage!")
     return damage
 
-def damage_heavy(name, hp, atk, defe):
-    fd = atk * 2
-    damage = damage_player(hp, fd, defe) #WOOOOOOAH YOU CAN LITERALLY JUST PUT IT HERE
-    output = hp - damage
-    if output < 0:
-        output = 0
-    print(f"With a defense of {defe}...")
-    print(f"The {name} exhausts itself for {output} damage!")
-    return damage
+def damage_light(monster:dict, player:dict):
+    damage = damage_player(player['hp'], monster['atk'], player['def'], monster['extra'])
+    print(f"With a defense of {player['def']}...")
+    print(f"The {monster['name']} deals {damage} damage!")
+
+    return player['hp'] - damage
+
+def damage_heavy(monster:dict, player:dict):
+    fd = monster['atk'] * 2
+    damage = damage_player(player['hp'], fd, player['def'], monster['extra']) #WOOOOOOAH YOU CAN LITERALLY JUST PUT IT HERE
+    print(f"With a defense of {player['def']}...")
+    print(f"The {monster['name']} exhausts themselves for {damage} damage!")
+
+    return player['hp'] - damage
+
+def damage_hyper(monster:dict, player:dict):
+    fd = monster['atk'] + 50
+    damage = damage_player(player['hp'], fd, player['def'], monster['extra']) #WOOOOOOAH YOU CAN LITERALLY JUST PUT IT HERE
+    print(f"With a defense of {player['def']}...")
+    print(f"The {monster['name']} unleashes a devastating attack for {damage} damage!!!")
+
+    return player['hp'] - damage

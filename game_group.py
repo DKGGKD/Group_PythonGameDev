@@ -4,9 +4,9 @@ import battle, class_system, textstuff
 #1. dungeon game x
 #2. player name add /
 #3. stats /
-#4. classes x
+#4. classes /
 #5. ATTACK /
-#6. defense and skill x
+#6. defense and skill /
 #7. inventory system x
 #8. If die = end /
 #9. game loop /
@@ -16,28 +16,34 @@ import battle, class_system, textstuff
 #13. if kill boss = end x
 
 #2
-name = textstuff.naming()
+# name = textstuff.naming()
 
 player = { #3
     
-    "name": name,
-    "atk" : 5,
-    "hp"  : 1,
+    "name": "YOU",
+    # "name": name,
+    "atk" : 100,
+    "hp"  : 1000,
+    "hp_max"  : 1000,
+    "mp"  : 100,
+    "mp_max"  : 100,
     "def" : 1,
-    "cls" : "THIS SHOULDN'T APPEAR"
+    "cls" : "THIS SHOULDN'T APPEAR",
+    "poison" : 10
     
 }
-print(f"Welcome to the die, {player['name']}!")
+if __name__ == "__main__":
+    # player = class_system.decide(player)
+    # input(">")
 
-player["cls"] = class_system.decide(player)
-print(player["cls"])
+    # print(f"Welcome to the die, {player['name']}!")
+    # input(">")
 
-#10
-while player["hp"] > 0: #will this fix monster appear?
-    #needs here:
-    #random int does either battle room, treasure room, hallway (50% to do something), and boss room (only applicable after 10 rooms)
+# #10
+    while player["hp"] > 0: #will this fix monster appear?
+        #needs here:
+        #random int does either battle room, treasure room, hallway (50% to do something), and boss room (only applicable after 10 rooms)
 
-    #new problem: monster health becomes player health after death
-    player["hp"] = battle.battleloop(player["name"], player["hp"], player["atk"], player["def"])
+        player["hp"] = battle.battleloop(player)
 
-textstuff.ded(player["name"])
+    textstuff.ded(player["name"])

@@ -1,6 +1,8 @@
 #for testing code
 # from monsters import spawn_monster
-# from monsters import monsters
+import textstuff, attack_system
+from monsters import spawn_monster
+
 # from monsters_intents import something
 # import random, attack_system, math
 
@@ -8,17 +10,86 @@
 # player = {
 #     "name": "BLANK",
 #     "atk": 3,
-#     "hp" : 1,
-#     "def" : 5
+#     "hp" : 5,
+#     "hp_max" : 10,
+#     "def" : 5,
+#     "mp" : 20,
+#     "mp_max" : 20
 # }
 # extra = 0
 
+player = { #3
+    
+    "name": "YOU",
+    # "name": name,
+    "atk" : 1,
+    "hp"  : 100,
+    "hp_max"  : 100,
+    "mp"  : 100,
+    "mp_max"  : 100,
+    "def" : 1,
+    "cls" : "THIS SHOULDN'T APPEAR"
+    
+}
+# print(f"\n{player['hp']}")
+
+# monster = spawn_monster()
+# print(monster)
+
+# player["hp"] = attack_system.damage_light(monster, player)
+
+# print(f"\n{player['hp']}")
+print(f"{player['hp']}")
+damage = attack_system.damage_player(player['hp'], 25, player['def'])
+print(f"this is damage {damage}")
+print(f"this is hp {player['hp']}")
+player['hp'] -= damage
+print(f"this is after {player['hp']}")
+
+# import skill_system, textstuff
+# from monsters import spawn_monster
+# player = { #3
+    
+#     "name": "YOU", #for testing
+#     #"name": name,
+#     "atk" : 10,
+#     "hp"  : 1,
+#     "hp_max"  : 100,
+#     "mp"  : 20,
+#     "mp_max"  : 20,
+#     "def" : 1,
+#     "cls" : "THIS SHOULDN'T APPEAR"
+    
+# }
+# extra = 0
+
+# monst_name, monst_atk, monst_hp, monst_def = spawn_monster()
+# textstuff.spawn(player["name"], monst_name)
+
+# status = monst_name, monst_atk, monst_hp, monst_def
+
+# player["mp"], player["hp"], extra = skill_system.skill_menu(player, extra, status)
+
+# print(f"MP: {player["mp"]}\nHP:{player["hp"]}\nExtra:{extra}")
+
+
+
+
+# extra = 0
+
 #CHECKING PLAYER STATS requires: from monsters import spawn_monster, monsters
-# def check():
-#     print("--------------------------")
-#     print(f"Name: {player["name"]}\nAttack: {player["atk"]}\nHP: {player["hp"]}\nDefense: {player["def"]}")
-#     print(f"\nOpponent: {monst_name}\nAttack: {monst_atk}\nHP: {monst_hp}\nDefense: {monst_def}")
-#     print("--------------------------")
+
+# import skill_system
+# from game_group import player
+# from monsters import monsters, spawn_monster
+
+# def check(player:dict, monster:tuple):
+#     print("--- STATS ---")
+#     print(f"*{player['name']}*\nAttack: {player['atk']}\nHP: {player['hp']}\nDefense: {player['def']}")
+#     print(f"\n*{monster['monst_name']}*\nAttack: {monster['monst_atk']}\nHP: {monster['monst_hp']}\nDefense: {monster['monst_def']}")
+#     print("--- STATS ---")
+
+# check(player, spawn_monster)
 
 
 #HEAL HP
@@ -96,18 +167,18 @@
 #                     damage_heavy(player["hp"], monst_atk, player["def"])
 #                     tired = 1 #be tired
 
-import battle
+# import battle
 
-player = { #3
-    "atk": 3,
-    "hp" : 100,
-    "def" : 0
-}
+# player = { #3
+#     "atk": 3,
+#     "hp" : 100,
+#     "def" : 0
+# }
 
-while True:
-    iny = input("choose:")
+# while True:
+#     iny = input("choose:")
 
-    if iny == "1":
-        battle.battleloop(player["hp"], player["atk"], player["def"])
-    else:
-        break
+#     if iny == "1":
+#         battle.battleloop(player["hp"], player["atk"], player["def"])
+#     else:
+#         break

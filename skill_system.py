@@ -1,11 +1,97 @@
-#GENERAL
-#healing system
+import textstuff
 
-#defending system
-    #halve damage/reduce damage to 0? (optional)
+#GENERAL
+#mp overflow
+def mp_add(mp:int, mp_max:int, value:int):
+    mp += value
+    if mp > mp_max:
+        overflow = mp - mp_max
+        mp = mp - overflow
+    return mp
+
+menu = ["Heavy Strike (5 MP)", "Heal (10 MP)",  "Super Armor (20 MP)", "Status", "Back"]
+
+#skill menu
+def skill_menu(player:dict, monster:dict, extra:int):
+    while True:
+        print(f"--- SKILLS (MP: {player['mp']}) ---")
+        for num, skill in enumerate(menu, 1):
+            print(f"{num}. {skill}")
+
+        skill_choice = int(input("Select a skill:\n>"))
+
+        if skill_choice == 1:
+            if player["mp"] >= 5:
+                player["mp"] -= 5
+                extra += 5
+                textstuff.squigly()
+                print("You feel temporarily powerful!")
+                textstuff.squigly()
+                continue
+            else:
+                textstuff.squigly()
+                print("Not enough mana!")
+                textstuff.squigly()
+                continue
+                        
+        elif skill_choice == 2:
+            if player["mp"] >= 10:
+                player["mp"] -= 10
+                player["hp"] = skill_heal(player["hp"], player["hp_max"])
+                textstuff.squigly()
+                print(f"You recovered back up to {player["hp"]}!")
+                textstuff.squigly()
+                continue
+            else:
+                print("Not enough mana!")
+                continue 
+
+        elif skill_choice == 3:
+            if player["mp"] >= 20:
+                player["mp"] -= 20
+                player["def"] += 999
+                textstuff.squigly()
+                print(f"You increase your defense by 999 this turn!")
+                textstuff.squigly()
+            else:
+                print("Not enough mana!")
+                continue 
+
+        elif skill_choice == 4:
+            check(player, monster)
+
+        elif skill_choice == 5:
+            print(f"--- SKILLS END ---\n")
+            return player, extra #has to unpack in order: 
+                            #player["mp"], player["hp"], extra = skill_system.skill_menu(player["mp"],player["hp"], player["hp_max"], extra)
+        
+        else:
+            print("You move your hands around randomly!")
+            continue
+
+#healing system
+def skill_heal(hp, hp_max):
+    hp += 5
+    if hp > hp_max:
+        overflow = hp - hp_max
+        hp = hp - overflow
+    return hp
+
+
+#rest system - rest this turn to recover a lot of mp
+def skill_rest(player:dict, value = 5):
+    player["mp"] = mp_add(player["mp"], player["mp_max"], value)
+    print(f"You rest, and recover back up to {player["mp"]} mp!")
+    return player["mp"]
 
 #check stats
-    #check on player and enemy stats
+def check(player:dict, monster:dict):
+    print("--- STATS ---")
+    print(f"{player['name']} the {player['cls']}\nAttack: {player['atk']}\nHP: {player['hp']}\nDefense: {player['def']}")
+    print(f"\n{monster['name']}\nAttack: {monster['atk'] + monster['extra']}\nHP: {monster['hp']}\nDefense: {monster['def']}\n'{monster['lore']}'")
+    print("--- STATS ---")
+
+
 
 
 #Different skills depending on classes? (optional)
