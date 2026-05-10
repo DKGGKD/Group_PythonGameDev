@@ -38,7 +38,7 @@ def build_monster(monster_tuple):
         "is_boss": is_boss,
         "extra": 0,
         "block": False,
-        "tired": Fals
+        "tired": False
     }
 
 def defeat_monster(monster, player_gold):
@@ -50,6 +50,25 @@ def defeat_monster(monster, player_gold):
         exit()  # End game
     
     return player_gold
+
+# --- Example combat loop with player death ---
+player_hp = 100
+player_gold = 0
+
+while True:
+    monster = spawn_monster()
+    print(f"A wild {monster['name']} appears! HP: {monster['hp']}, Attack: {monster['atk']}")
+    
+    while monster["hp"] > 0 and player_hp > 0:
+        
+        if player_hp <= 0:
+            print("💀 You have died. Game Over.")
+            exit()
+        
+    
+    player_gold = defeat_monster(monster, player_gold)
+    print(f"Total Gold: {player_gold}\n")
+
 
 
 ##Needs:
